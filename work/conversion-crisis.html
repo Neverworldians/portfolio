@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When Rankings Go Up But Leads Go Down — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+/* CASE STUDY */
+.case-study { padding-top: 64px; }
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+/* CALLOUT */
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--accent-subtle);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* STAT BLOCKS */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+.stat-block {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-light);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* DIAGNOSIS STEPS */
+.diag-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 2.5rem 0;
+}
+.diag-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.diag-step:last-child { border-bottom: none; }
+.diag-num {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-light);
+  flex-shrink: 0;
+}
+.diag-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.diag-verdict {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 100px;
+  margin-left: 0.5rem;
+  position: relative;
+  top: -1px;
+}
+.verdict-clear {
+  background: rgba(107, 58, 58, 0.2);
+  color: #e8a0a0;
+}
+.verdict-found {
+  background: var(--accent-subtle);
+  color: var(--accent-light);
+}
+.diag-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* CHART */
+.chart-wrapper {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem 1.5rem;
+  margin: 2.5rem 0;
+}
+.chart-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.chart-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+.chart-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.chart-legend span { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+}
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.chart-tooltip {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.82rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+  white-space: nowrap;
+}
+.chart-tooltip.visible { opacity: 1; }
+.tooltip-month { font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+.tooltip-value { color: var(--text-muted); }
+.tooltip-note { color: var(--text-dim); font-style: italic; font-size: 0.75rem; margin-top: 0.2rem; }
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .diag-step { grid-template-columns: 42px 1fr; gap: 1rem; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .stat-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../">Work</a>
+      <a href="../">Experience</a>
+      <a href="../" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">Agency · B2C Healthcare</p>
+    <h1 class="case-title">When Rankings Go Up But Leads Go Down: Diagnosing a Conversion Crisis</h1>
+    <p class="case-desc">A plastic surgery client's SEO was winning on every metric except the one that mattered. I found the real problem, sold the fix, and delivered the best year in the clinic's history.</p>
+    <div class="case-tags">
+      <span class="tag">SEO</span>
+      <span class="tag">CRO</span>
+      <span class="tag">Website Redesign</span>
+      <span class="tag">Strategic Consulting</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <h2>The Problem</h2>
+    <p>This was a long-standing plastic surgery and medspa client with a legacy website built around 2014–2015, well before modern UX, CRO, or mobile expectations. I inherited the SEO account years later, and for a while, performance was strong.</p>
+    <p>But over the course of several months in 2023–2024, I noticed a steady and significant decline in leads, even as rankings and traffic continued to climb.</p>
+
+    <div class="callout">Rankings up. Traffic up. Leads down. Something in the middle was broken, and the surface metrics were hiding it.</div>
+
+    <h2>The Diagnosis</h2>
+    <p>I started where most people skip: the data.</p>
+
+    <div class="diag-steps">
+      <div class="diag-step">
+        <div class="diag-num">1</div>
+        <div>
+          <div class="diag-title">Funnel Analysis <span class="diag-verdict verdict-found">Root cause found</span></div>
+          <div class="diag-text">Reviewed internal dashboards and call tracking metrics. Phone leads, previously the top conversion type, had dropped dramatically. Form fills were steady. The bleed was coming from calls.</div>
+        </div>
+      </div>
+      <div class="diag-step">
+        <div class="diag-num">2</div>
+        <div>
+          <div class="diag-title">Technical Audit <span class="diag-verdict verdict-clear">All clear</span></div>
+          <div class="diag-text">Full audit to rule out obvious issues: broken CTAs, mobile click-to-call failures, form glitches. Nothing was malfunctioning. The site worked. It just wasn't working for users.</div>
+        </div>
+      </div>
+      <div class="diag-step">
+        <div class="diag-num">3</div>
+        <div>
+          <div class="diag-title">Traffic &amp; Ranking Verification <span class="diag-verdict verdict-clear">All clear</span></div>
+          <div class="diag-text">Confirmed we were not losing traffic. On the contrary, we were attracting more, including local traffic. Rankings for core procedures remained stable or improved. This was not a visibility problem.</div>
+        </div>
+      </div>
+      <div class="diag-step">
+        <div class="diag-num">4</div>
+        <div>
+          <div class="diag-title">Competitive SERP Review <span class="diag-verdict verdict-found">Problem confirmed</span></div>
+          <div class="diag-text">Investigated how we stacked up in the actual search landscape for top terms. Every competitor had modern, clean websites with updated branding and more persuasive content. Our client's site looked dated, text-heavy, and visually cluttered by comparison.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">We had a conversion bottleneck hidden beneath surface-level success metrics. We were winning the race to get people to the site, then losing them the moment they arrived.</div>
+
+    <h2>The Business Case</h2>
+    <p>I built and delivered a strategic presentation walking the client through exactly how competitors were winning conversions with better first impressions, not better rankings. I showed the data trail: traffic up, rankings up, leads down, and what the competitive landscape looked like side by side.</p>
+    <p>He approved a full rebrand and website redesign.</p>
+
+    <div class="stat-row">
+      <div class="stat-block">
+        <div class="stat-number">$100K+</div>
+        <div class="stat-label">Additional revenue to the agency</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">Full rebrand</div>
+        <div class="stat-label">Website + content + identity</div>
+      </div>
+    </div>
+
+    <p>I didn't just solve a client problem. I identified a business opportunity, built the case, sold it, and delivered it.</p>
+
+    <h2>The Execution</h2>
+    <p>I led the project across three teams: coordinating with designers and the creative director on design direction (balancing brand identity with SEO/conversion performance), directing the web development team through the build, and leading the content workstream directly.</p>
+
+    <div class="diag-steps">
+      <div class="diag-step">
+        <div class="diag-num">→</div>
+        <div>
+          <div class="diag-title">Content Audit &amp; Cleanup</div>
+          <div class="diag-text">Audited and removed thin, outdated legacy content that predated my involvement. Reduced bloat and simplified the migration.</div>
+        </div>
+      </div>
+      <div class="diag-step">
+        <div class="diag-num">→</div>
+        <div>
+          <div class="diag-title">Page Migration &amp; Content Refresh</div>
+          <div class="diag-text">Led copywriters through key pages being rewritten or heavily edited with updated USPs, tighter copy, and clearer CTAs. Some content was merged to improve structure. Pages that performed well were migrated intact, preserving SEO equity.</div>
+        </div>
+      </div>
+      <div class="diag-step">
+        <div class="diag-num">→</div>
+        <div>
+          <div class="diag-title">Risk Management</div>
+          <div class="diag-text">Communicated upfront that there would be an initial traffic dip post-redesign, which is standard for migrations. Setting that expectation early meant the client didn't panic when the dip happened and trusted the recovery plan.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Results</h2>
+    <p>The traffic dip came as expected, followed by a strong recovery. New pages began ranking higher than before, including keywords we'd been historically stuck outside the top 3 for.</p>
+
+    <div class="chart-wrapper">
+      <div class="chart-title">Leads: 2024 vs 2025</div>
+      <div class="chart-subtitle">Hover to explore. Dashed line = projected based on Jan–Feb trend.</div>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background: var(--text-dim);"></span> 2024 (actual)</span>
+        <span><span class="legend-dot" style="background: var(--accent-light);"></span> 2025 (actual)</span>
+        <span><span class="legend-dot" style="background: var(--accent-light); opacity: 0.4;"></span> 2025 (projected)</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="leadsChart"></canvas>
+        <div class="chart-tooltip" id="tooltip"></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-block">
+        <div class="stat-number">Jan 2025</div>
+        <div class="stat-label">Most leads since 2015</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">Best year</div>
+        <div class="stat-label">2025 confirmed as record year</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">+30%</div>
+        <div class="stat-label">Jan leads vs. prior year</div>
+      </div>
+    </div>
+
+    <p>After I left the agency, the person who took over the account confirmed that 2025 became the client's best year on record.</p>
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const data2024 = [1011, 864, 923, 1010, 956, 824, 973, 917, 948, 976, 967, 932];
+  const data2025Actual = [1316, 1201];
+
+  // Project rest of 2025 based on Jan-Feb trend
+  // Jan-Feb 2025 avg is ~1258, which is ~30% above 2024 avg of ~950
+  // Apply that ~30% lift to each remaining 2024 month
+  const avgLift = ((1316 / 1011) + (1201 / 864)) / 2;
+  const data2025Projected = data2024.slice(2).map(v => Math.round(v * avgLift));
+
+  const canvas = document.getElementById('leadsChart');
+  const tooltip = document.getElementById('tooltip');
+  const ctx = canvas.getContext('2d');
+
+  let dpr, w, h;
+  const padL = 50, padR = 24, padT = 20, padB = 40;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    w = rect.width;
+    h = rect.height;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function getX(i) {
+    return padL + (i / 11) * (w - padL - padR);
+  }
+
+  function getY(v) {
+    const minV = 700, maxV = 1500;
+    return padT + (1 - (v - minV) / (maxV - minV)) * (h - padT - padB);
+  }
+
+  function draw(hoverIdx) {
+    ctx.clearRect(0, 0, w, h);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(37, 45, 54, 0.6)';
+    ctx.lineWidth = 1;
+    for (let v = 800; v <= 1400; v += 200) {
+      const y = getY(v);
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(w - padR, y);
+      ctx.stroke();
+
+      ctx.fillStyle = '#556068';
+      ctx.font = '11px Inter, system-ui';
+      ctx.textAlign = 'right';
+      ctx.fillText(v.toString(), padL - 8, y + 4);
+    }
+
+    // Month labels
+    ctx.fillStyle = '#556068';
+    ctx.font = '11px Inter, system-ui';
+    ctx.textAlign = 'center';
+    months.forEach((m, i) => {
+      ctx.fillText(m, getX(i), h - padB + 20);
+    });
+
+    // Hover column highlight
+    if (hoverIdx !== null) {
+      const x = getX(hoverIdx);
+      ctx.strokeStyle = 'rgba(47, 186, 194, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, padT);
+      ctx.lineTo(x, h - padB);
+      ctx.stroke();
+    }
+
+    // 2024 line
+    ctx.strokeStyle = '#556068';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    data2024.forEach((v, i) => {
+      const x = getX(i), y = getY(v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // 2024 dots
+    data2024.forEach((v, i) => {
+      const x = getX(i), y = getY(v);
+      ctx.beginPath();
+      ctx.arc(x, y, hoverIdx === i ? 5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = hoverIdx === i ? '#8896a0' : '#556068';
+      ctx.fill();
+    });
+
+    // 2025 actual line
+    ctx.strokeStyle = '#2fbac2';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    data2025Actual.forEach((v, i) => {
+      const x = getX(i), y = getY(v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // 2025 actual dots
+    data2025Actual.forEach((v, i) => {
+      const x = getX(i), y = getY(v);
+      ctx.beginPath();
+      ctx.arc(x, y, hoverIdx === i ? 6 : 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#2fbac2';
+      ctx.fill();
+    });
+
+    // 2025 projected line (dashed)
+    ctx.strokeStyle = 'rgba(47, 186, 194, 0.4)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    // Start from last actual point
+    ctx.moveTo(getX(1), getY(data2025Actual[1]));
+    data2025Projected.forEach((v, i) => {
+      ctx.lineTo(getX(i + 2), getY(v));
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 2025 projected dots
+    data2025Projected.forEach((v, i) => {
+      const idx = i + 2;
+      const x = getX(idx), y = getY(v);
+      ctx.beginPath();
+      ctx.arc(x, y, hoverIdx === idx ? 5 : 3, 0, Math.PI * 2);
+      ctx.fillStyle = hoverIdx === idx ? 'rgba(47, 186, 194, 0.7)' : 'rgba(47, 186, 194, 0.35)';
+      ctx.fill();
+    });
+  }
+
+  function getHoverIndex(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    let closest = null, minDist = Infinity;
+    for (let i = 0; i < 12; i++) {
+      const d = Math.abs(getX(i) - mx);
+      if (d < minDist) { minDist = d; closest = i; }
+    }
+    return minDist < 30 ? closest : null;
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    const idx = getHoverIndex(e);
+    draw(idx);
+
+    if (idx === null) {
+      tooltip.classList.remove('visible');
+      return;
+    }
+
+    const rect = canvas.getBoundingClientRect();
+    const x = getX(idx);
+    const val2024 = data2024[idx];
+    let val2025, isProjected;
+
+    if (idx < 2) {
+      val2025 = data2025Actual[idx];
+      isProjected = false;
+    } else {
+      val2025 = data2025Projected[idx - 2];
+      isProjected = true;
+    }
+
+    const change = (((val2025 - val2024) / val2024) * 100).toFixed(0);
+    const sign = change > 0 ? '+' : '';
+
+    tooltip.innerHTML = `
+      <div class="tooltip-month">${months[idx]}</div>
+      <div class="tooltip-value">2024: <strong>${val2024.toLocaleString()}</strong></div>
+      <div class="tooltip-value">2025: <strong>${val2025.toLocaleString()}</strong> (${sign}${change}%)</div>
+      ${isProjected ? '<div class="tooltip-note">Projected based on Jan–Feb trend</div>' : ''}
+    `;
+    tooltip.classList.add('visible');
+
+    const tooltipW = tooltip.offsetWidth;
+    let left = x - tooltipW / 2;
+    if (left < 0) left = 4;
+    if (left + tooltipW > w) left = w - tooltipW - 4;
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = (getY(Math.max(val2024, val2025)) - 80) + 'px';
+  });
+
+  canvas.addEventListener('mouseleave', function() {
+    draw(null);
+    tooltip.classList.remove('visible');
+  });
+
+  resize();
+  draw(null);
+  window.addEventListener('resize', () => { resize(); draw(null); });
+})();
+</script>
+</body>
+</html>

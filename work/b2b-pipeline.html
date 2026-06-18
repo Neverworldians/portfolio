@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a B2B Pipeline From Scratch — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+.case-study { padding-top: 64px; }
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+.callout { border-left: 3px solid var(--accent); padding: 1.25rem 1.5rem; margin: 2rem 0; background: var(--accent-subtle); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 1.1rem; color: var(--text); line-height: 1.65; font-style: italic; }
+
+.wide { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* SEGMENT CARDS */
+.segment-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+.segment-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.segment-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); margin-bottom: 0.5rem; }
+.segment-who { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+.segment-msg { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; font-style: italic; }
+
+/* TWO SYSTEMS */
+.systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+.system-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.system-card-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.system-card-sub { font-size: 0.78rem; color: var(--accent-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+.system-card-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+/* OBSTACLE CARDS */
+.obstacle-cards { display: flex; flex-direction: column; gap: 1rem; margin: 2.5rem 0; }
+.obstacle-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.obstacle-problem { }
+.obstacle-solve { }
+.obstacle-heading { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.obstacle-heading.prob { color: #c27272; }
+.obstacle-heading.sol { color: var(--accent-light); }
+.obstacle-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ARCHITECTURE DIAGRAM */
+.arch-stack { display: flex; flex-direction: column; gap: 0; margin: 2.5rem 0; }
+.arch-layer {
+  background: var(--bg-raised); border: 1px solid var(--border); padding: 1.25rem 1.5rem;
+  display: grid; grid-template-columns: 140px 1fr; gap: 1.25rem; align-items: center;
+}
+.arch-layer:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+.arch-layer:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+.arch-layer:not(:last-child) { border-bottom: none; }
+.arch-layer-name { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); }
+.arch-layer-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+.arch-arrow { text-align: center; font-size: 1rem; color: var(--accent); opacity: 0.5; padding: 0.25rem 0; }
+
+/* OUTREACH FLOWCHART */
+.outreach-flow { margin: 2rem 0; display: flex; flex-direction: column; align-items: center; }
+.of-box {
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.5rem; text-align: center; width: 100%; max-width: 400px;
+}
+.of-box-label { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.of-box-sub { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.15rem; }
+.of-connector { width: 2px; height: 20px; background: var(--accent); opacity: 0.4; }
+.of-decision {
+  background: var(--accent-subtle); border: 2px solid var(--accent); border-radius: var(--radius);
+  padding: 0.85rem 1.5rem; text-align: center; width: 100%; max-width: 400px;
+}
+.of-decision-label { font-size: 0.9rem; font-weight: 700; color: var(--accent-light); }
+.of-fork { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; width: 100%; max-width: 500px; position: relative; margin-top: 0; }
+.of-fork::before { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 2px; background: var(--accent); opacity: 0.4; }
+.of-branch { position: relative; padding-top: 20px; text-align: center; }
+.of-branch::before { content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 20px; background: var(--accent); opacity: 0.4; }
+.of-branch-box { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+.of-branch-title { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.25rem; }
+.of-branch-title.warm { color: var(--accent-light); }
+.of-branch-title.cold { color: var(--text-dim); }
+.of-branch-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .segment-cards { grid-template-columns: 1fr; }
+  .systems-grid { grid-template-columns: 1fr; }
+  .obstacle-card { grid-template-columns: 1fr; }
+  .arch-layer { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../">Work</a>
+      <a href="../">Experience</a>
+      <a href="../" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">Multi-Brand Hospitality</p>
+    <h1 class="case-title">Building a B2B Pipeline From Scratch (When the Tech Stack Fights You Every Step of the Way)</h1>
+    <p class="case-desc">One BDM doing manual cold outreach, a CRM that doesn't support automation, and an events calendar with gaps to fill. I built the system that tied it all together.</p>
+    <div class="case-tags">
+      <span class="tag">Marketing Automation</span>
+      <span class="tag">B2B Pipeline</span>
+      <span class="tag">Lead Nurture</span>
+      <span class="tag">CRM Integration</span>
+      <span class="tag">Change Management</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <h2>The Situation</h2>
+    <p>The company operates a large event and meeting venue within a hospitality portfolio. The events calendar had gaps that needed filling, and the business development team consisted of one person doing manual cold outreach to event planners.</p>
+    <p>She's great at researching companies and finding opportunities. But everything after that was manual. Every follow-up, every touchpoint, every nurture email was her, writing and sending one at a time.</p>
+    <p>Leadership came to me with two separate asks. The first: help her scale. The second: what else can marketing do to fill the calendar? I saw them as one problem. We had no automated pipeline. Everything depended on manual effort. And there was an entire pool of warm and lapsed contacts sitting untouched in the CRM with zero follow-up happening.</p>
+
+    <h2>The Strategy</h2>
+    <p>I designed two parallel systems that fed into the same goal: filling the events calendar through automated, segmented outreach.</p>
+
+    <div class="wide">
+      <div class="systems-grid">
+        <div class="system-card">
+          <div class="system-card-sub">System 1</div>
+          <div class="system-card-title">Reactivation Engine</div>
+          <div class="system-card-desc">Targeted contacts already in our database who had gone cold. Three distinct segments, each with different messaging and cadence.</div>
+        </div>
+        <div class="system-card">
+          <div class="system-card-sub">System 2</div>
+          <div class="system-card-title">Outreach Automation</div>
+          <div class="system-card-desc">Built around the BDM's existing research workflow. Zero disruption to how she works. The system picks up where her manual process used to start.</div>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>The reactivation engine</strong> targeted three segments already sitting in the database:</p>
+
+    <div class="wide">
+      <div class="segment-cards">
+        <div class="segment-card">
+          <div class="segment-label">Segment 1</div>
+          <div class="segment-who">Past Clients</div>
+          <div class="segment-msg">"We'd love to have you back."</div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-label">Segment 2</div>
+          <div class="segment-who">Lost RFPs</div>
+          <div class="segment-msg">"We'd love another shot."</div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-label">Segment 3</div>
+          <div class="segment-who">Unconverted Site Visits</div>
+          <div class="segment-msg">"Still looking for a venue?"</div>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>The outreach automation</strong> was built around the BDM's existing workflow. She was already filling out a research document for every prospect she identified. I kept that intact. The system picks up where her manual process used to start: it follows up automatically in her voice based on the data she gathered, watches for signs of engagement, and when a lead warms up, it kicks them back to her for personal follow-up.</p>
+
+    <div class="wide">
+      <div class="outreach-flow">
+        <div class="of-box">
+          <div class="of-box-label">BDM researches prospect</div>
+          <div class="of-box-sub">Fills out research doc (existing workflow, unchanged)</div>
+        </div>
+        <div class="of-connector"></div>
+        <div class="of-box">
+          <div class="of-box-label">System sends automated follow-ups</div>
+          <div class="of-box-sub">In her voice, based on her research data</div>
+        </div>
+        <div class="of-connector"></div>
+        <div class="of-decision">
+          <div class="of-decision-label">Engagement detected?</div>
+        </div>
+        <div class="of-connector"></div>
+        <div class="of-fork">
+          <div class="of-branch">
+            <div class="of-branch-box">
+              <div class="of-branch-title warm">Yes → Warm lead</div>
+              <div class="of-branch-desc">Flagged and routed back to BDM for personal follow-up</div>
+            </div>
+          </div>
+          <div class="of-branch">
+            <div class="of-branch-box">
+              <div class="of-branch-title cold">No → Cold lead</div>
+              <div class="of-branch-desc">Moves to long-term monthly nurture to stay top of mind</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>On top of both systems, I'm running display ads on Google and LinkedIn as air cover, targeting the specific contacts we're reaching out to. So when a prospect gets an email and then sees our venue in a display ad that same week, it reinforces the touchpoint without us spending on broad awareness.</p>
+
+    <h2>The Obstacles</h2>
+
+    <div class="wide">
+      <div class="obstacle-cards">
+        <div class="obstacle-card">
+          <div class="obstacle-problem">
+            <div class="obstacle-heading prob">The Problem</div>
+            <div class="obstacle-text">The company uses Amadeus Delphi as their CRM, which doesn't support marketing automation natively. There's no built-in way to trigger email sequences, segment contacts by behavior, or track engagement.</div>
+          </div>
+          <div class="obstacle-solve">
+            <div class="obstacle-heading sol">The Solve</div>
+            <div class="obstacle-text">I built the entire automation layer from Zapier and Mailchimp. Zapier handles the internal logic, moving contacts between stages based on tags and statuses. Mailchimp handles the actual communication.</div>
+          </div>
+        </div>
+        <div class="obstacle-card">
+          <div class="obstacle-problem">
+            <div class="obstacle-heading prob">The Problem</div>
+            <div class="obstacle-text">The reactivation engine depends on knowing when someone does a site visit, and the sales team wasn't tracking that.</div>
+          </div>
+          <div class="obstacle-solve">
+            <div class="obstacle-heading sol">The Solve</div>
+            <div class="obstacle-text">I had to make the case for why tracking matters, train them on the process, and follow up consistently until the behavior stuck. That's not a technical problem. That's a change management problem, and it took more effort than building the automation itself.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The System Design</h2>
+    <p>The architecture I built connects three layers:</p>
+
+    <div class="wide">
+      <div class="arch-stack">
+        <div class="arch-layer">
+          <div class="arch-layer-name">Data Layer</div>
+          <div class="arch-layer-desc">The BDM's research feeds the outreach system. The sales team's CRM updates feed the reactivation system. Both flow through Zapier, which handles the routing logic.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">Communication Layer</div>
+          <div class="arch-layer-desc">Mailchimp sends the actual emails, personalized by segment and triggered by status changes. Each sequence has its own cadence, messaging, and escalation rules.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">Handoff Layer</div>
+          <div class="arch-layer-desc">Engagement signals (opens, clicks, replies) are monitored. Warm leads get flagged and routed back for personal follow-up. Cold leads move to long-term nurture. The system sorts itself over time.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">The whole point was to build something that works without me babysitting it. The BDM keeps doing what she's good at (research and relationships), the system handles the repetitive middle, and the pipeline fills itself.</div>
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

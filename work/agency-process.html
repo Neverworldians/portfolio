@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebuilding an Agency's Entire Production Process — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+.case-study { padding-top: 64px; }
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+.callout { border-left: 3px solid var(--accent); padding: 1.25rem 1.5rem; margin: 2rem 0; background: var(--accent-subtle); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 1.1rem; color: var(--text); line-height: 1.65; font-style: italic; }
+
+.wide { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* PHASE MARKER */
+.phase-marker {
+  display: flex; align-items: center; gap: 1rem; margin: 3.5rem 0 1.25rem;
+}
+.phase-num {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--accent-subtle); border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 800; color: var(--accent-light); flex-shrink: 0;
+}
+.phase-title { font-size: 1.35rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+
+/* PROCESS FLOW */
+.process-flow { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; }
+.pf-step { display: flex; align-items: flex-start; gap: 1rem; position: relative; padding: 0.75rem 0; }
+.pf-step::after { content: ''; position: absolute; left: 15px; top: calc(100% - 8px); width: 2px; height: 16px; background: var(--accent); opacity: 0.3; }
+.pf-step:last-child::after { display: none; }
+.pf-dot { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-subtle); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; color: var(--accent-light); flex-shrink: 0; }
+.pf-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; padding-top: 0.3rem; }
+
+/* CHART */
+.chart-wrapper { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 2rem 0; }
+.chart-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem; }
+.chart-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.chart-subtitle { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1rem; }
+.chart-container { position: relative; width: 100%; height: 280px; }
+.chart-container canvas { width: 100% !important; height: 100% !important; }
+.chart-tooltip { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; font-size: 0.78rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 10; white-space: nowrap; }
+.chart-tooltip.visible { opacity: 1; }
+.tooltip-month { font-weight: 700; color: var(--text); }
+.tooltip-value { color: var(--text-muted); }
+.tooltip-note { color: var(--accent-light); font-size: 0.72rem; font-weight: 600; margin-top: 0.15rem; }
+.chart-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.chart-tab { padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+.chart-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+.chart-tab:hover:not(.active) { border-color: var(--text-muted); color: var(--text); }
+
+/* STAT ROW */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat-block { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+.stat-number { font-size: 1.75rem; font-weight: 800; color: var(--accent-light); letter-spacing: -0.03em; line-height: 1.2; }
+.stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; font-weight: 500; }
+
+/* COMPARE */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.compare-box { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.compare-box.before { border-top: 3px solid #6b3a3a; }
+.compare-box.after { border-top: 3px solid var(--accent); }
+.compare-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.compare-box.before .compare-label { color: #c27272; }
+.compare-box.after .compare-label { color: var(--accent-light); }
+.compare-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+/* IMG */
+.case-img { border-radius: var(--radius); border: 1px solid var(--border); margin: 2rem 0; max-width: 100%; }
+
+/* ARC */
+.arc-flow { display: flex; flex-direction: column; gap: 0; margin: 2.5rem 0; }
+.arc-step { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; position: relative; }
+.arc-step::after { content: ''; position: absolute; left: 15px; top: calc(100% - 4px); width: 2px; height: 8px; background: var(--accent); opacity: 0.3; }
+.arc-step:last-child::after { display: none; }
+.arc-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-subtle); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.arc-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.5; }
+.arc-text strong { color: var(--text); }
+
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .compare { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .stat-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; cursor: zoom-out;
+  padding: 2rem;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 100%; max-height: 90vh; border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  font-size: 1.5rem; color: var(--text-muted); cursor: pointer;
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--bg-raised); border: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--text); }
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../">Work</a>
+      <a href="../">Experience</a>
+      <a href="../" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">Agency · B2C</p>
+    <h1 class="case-title">How I Rebuilt an Agency's Entire Production Process (By Following the Bottleneck)</h1>
+    <p class="case-desc">Each fix revealed the next problem. Bad SEO process, then bad pages, then bad design, then inefficient production. I fixed them one by one and changed how the agency worked.</p>
+    <div class="case-tags">
+      <span class="tag">SEO</span>
+      <span class="tag">CRO</span>
+      <span class="tag">Process Design</span>
+      <span class="tag">Team Training</span>
+      <span class="tag">Paid Media</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <h2>The Situation</h2>
+    <p>I was hired as a Digital Marketing Manager at a fully staffed digital marketing agency. Within my first month, I realized the SEO process had a structural problem.</p>
+    <p>Clients and account managers picked blog and page topics based on gut feeling. Those topics went to freelance copywriters. The finished content then came to SEOs with a request to "research some keywords and put them in the headers and alt text." Then it got posted.</p>
+
+    <div class="callout">The SEO team was positioned at the end of the process when they should have been driving it from the start.</div>
+
+    <!-- PHASE 1 -->
+    <div class="phase-marker">
+      <div class="phase-num">1</div>
+      <div class="phase-title">Fixing the SEO Process</div>
+    </div>
+
+    <p>I proposed a new system to my manager. We ran a limited test first to make sure it didn't strain existing infrastructure. The process itself was straightforward:</p>
+
+    <div class="process-flow">
+      <div class="pf-step">
+        <div class="pf-dot">1</div>
+        <div class="pf-text"><strong>SEOs research topics first.</strong> What are people actually searching for? Does it have business value for the client? What's the intent?</div>
+      </div>
+      <div class="pf-step">
+        <div class="pf-dot">2</div>
+        <div class="pf-text"><strong>SEOs build a keyword list and write a brief</strong> for the copywriter handoff.</div>
+      </div>
+      <div class="pf-step">
+        <div class="pf-dot">3</div>
+        <div class="pf-text"><strong>Copywriter writes based on the brief,</strong> sends to SEO for review, edits if needed.</div>
+      </div>
+      <div class="pf-step">
+        <div class="pf-dot">4</div>
+        <div class="pf-text"><strong>QA for grammar, client approval, then publish.</strong></div>
+      </div>
+    </div>
+
+    <p>The results weren't subtle. Every client that ran through the new system saw significant traffic growth. Every client that didn't, didn't. The agency eventually rolled the process out to all accounts.</p>
+
+    <div class="wide">
+      <div class="chart-wrapper">
+        <div class="chart-title">Organic Traffic Growth by Client</div>
+        <div class="chart-subtitle">Hover over bars for details. Dashed line marks when I took over.</div>
+        <div class="chart-tabs">
+          <button class="chart-tab active" onclick="switchClient(0)">Client 1</button>
+          <button class="chart-tab" onclick="switchClient(1)">Client 2</button>
+          <button class="chart-tab" onclick="switchClient(2)">Client 3</button>
+          <button class="chart-tab" onclick="switchClient(3)">Client 4</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="trafficChart"></canvas>
+          <div class="chart-tooltip" id="tooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-marker">
+      <div class="phase-num">2</div>
+      <div class="phase-title">The Conversion Problem</div>
+    </div>
+
+    <p>More traffic was great, but it didn't translate proportionally into more leads. That forced me to look at what was happening after the click.</p>
+    <p>The answer was on the pages themselves. The agency's websites were built like informational wikis, even when the pages were supposed to sell services. A Botox page would open with "What is Botox?" Think about that for a second: someone just typed "Botox" into Google. They know what Botox is. They're looking for a provider, not a definition.</p>
+
+    <div class="wide">
+      <div class="compare">
+        <div class="compare-box before">
+          <div class="compare-label">Agency website pages</div>
+          <div class="compare-text">Informational wiki style. "What is Botox?" Educational content for people who already know what they want. Conversion rate: 1–2%.</div>
+        </div>
+        <div class="compare-box after">
+          <div class="compare-label">My PPC landing pages</div>
+          <div class="compare-text">Persuasive, benefit-focused, you-focused. Clear CTAs, proper structure, built for the person who already searched. Conversion rate: 6–9%.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>I was running PPC landing pages on Unbounce separately from the main website, so I used those as a testing ground. Once I had the data proving the approach worked, I could make the case for changing how everyone else worked too.</p>
+
+    <p><em>PPC campaign performance showing conversion rates across ad groups (click to zoom):</em></p>
+    <img class="case-img lightbox-trigger" src="../images/ppc-conversion-rates.png" alt="Google Ads conversion rate data showing 5-12% conversion rates across campaigns" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <div class="lightbox-close">✕</div>
+      <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-marker">
+      <div class="phase-num">3</div>
+      <div class="phase-title">Training the Team</div>
+    </div>
+
+    <p>I established a weekly training session I called <strong>"Grill Websites."</strong> The formal term would be heuristic teardown, but that's less fun. Every week, I'd gather the copywriters for an hour. We'd pull up real websites (sometimes our own, sometimes terrible ones I found in the wild) and talk through user intent, customer journey, persuasive principles, and what was actually happening when a page failed to convert.</p>
+    <p>The goal wasn't to hand them templates. It was to teach them how to think about the person on the other side of the screen. Why are they on this page? What did they just type into Google? What do they need to hear next?</p>
+
+    <div class="callout">One of the people I trained, a PPC specialist rather than a copywriter, ended up building a landing page that converted at 10%, higher than anything I'd personally achieved. That's the best outcome a training program can produce: someone you taught outperforming you.</div>
+
+    <!-- PHASE 4 -->
+    <div class="phase-marker">
+      <div class="phase-num">4</div>
+      <div class="phase-title">Changing the Production Model</div>
+    </div>
+
+    <p>The last piece was design. The agency's designers were designing for aesthetics, not conversions. The visual work looked good but it wasn't structured to support the persuasive copy framework that was now producing results.</p>
+    <p>I pushed for a new protocol: <strong>copy comes first, design supports it after.</strong> This was a fight, but the conversion data made the argument for me.</p>
+    <p>Once that was established, we took it further. Since persuasive page elements tend to come in predictable forms (hero sections, benefit blocks, social proof, CTAs), we moved to a modular design and development system. Instead of custom-building every page from scratch, we had reusable components that could be assembled and customized per client.</p>
+
+    <div class="wide">
+      <div class="stat-row">
+        <div class="stat-block">
+          <div class="stat-number">Lower</div>
+          <div class="stat-label">Production cost per website project</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">Higher</div>
+          <div class="stat-label">Conversion performance</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">Faster</div>
+          <div class="stat-label">Delivery timelines</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Full Arc</h2>
+
+    <div class="wide">
+      <div class="arc-flow">
+        <div class="arc-step">
+          <div class="arc-icon">🔍</div>
+          <div class="arc-text"><strong>Bad SEO process</strong> meant we weren't getting traffic</div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-icon">📈</div>
+          <div class="arc-text">Fixing that revealed <strong>our pages weren't converting</strong></div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-icon">✍️</div>
+          <div class="arc-text">Fixing conversion copy revealed <strong>design wasn't supporting it</strong></div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-icon">⚙️</div>
+          <div class="arc-text">Fixing design revealed <strong>we could systematize the whole thing</strong> into a more efficient production model</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const clients = [
+  {
+    name: 'Client 1',
+    startIdx: 37, // Nov 2022
+    labels: ['Oct 19','Nov 19','Dec 19','Jan 20','Feb 20','Mar 20','Apr 20','May 20','Jun 20','Jul 20','Aug 20','Sep 20','Oct 20','Nov 20','Dec 20','Jan 21','Feb 21','Mar 21','Apr 21','May 21','Jun 21','Jul 21','Aug 21','Sep 21','Oct 21','Nov 21','Dec 21','Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22','Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22','Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jun 23','Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23','Jan 24','Feb 24','Mar 24'],
+    data: [13160,12613,12669,16236,15888,13377,8934,9532,15397,18379,19213,18651,20920,20872,20431,29049,23193,29510,30750,28196,29693,25058,24679,22572,21965,22374,22693,26514,24175,28651,27509,26098,27594,27912,29699,26593,28544,27016,26196,31132,27380,33058,35653,38846,41565,53696,68089,67643,72171,94280,96238,122739,125911,136857],
+    peak: '136,857',
+    growth: '407%'
+  },
+  {
+    name: 'Client 2',
+    startIdx: 7, // Jan 2022
+    labels: ['Jun 21','Jul 21','Aug 21','Sep 21','Oct 21','Nov 21','Dec 21','Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22','Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22','Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jun 23','Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23','Jan 24','Feb 24','Mar 24'],
+    data: [8444,10009,11465,10821,11337,9697,8194,11319,10339,12000,11813,11777,12299,10948,11864,12894,17071,18242,22943,30514,27397,32523,35178,31599,29412,31597,31176,21474,21020,25356,27223,30310,27419,29384],
+    peak: '35,178',
+    growth: '211%'
+  },
+  {
+    name: 'Client 3',
+    startIdx: 7, // Jan 2022
+    labels: ['Jun 21','Jul 21','Aug 21','Sep 21','Oct 21','Nov 21','Dec 21','Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22','Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22','Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jun 23','Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23','Jan 24','Feb 24','Mar 24'],
+    data: [6101,8538,8957,9512,10346,9368,5709,6996,6575,7552,6778,7393,10128,11467,13774,13078,13886,14233,13513,16404,16833,18173,16938,19246,16942,16368,17026,17199,17643,17494,15412,16540,15565,13584],
+    peak: '19,246',
+    growth: '175%'
+  },
+  {
+    name: 'Client 4',
+    startIdx: 17, // Nov 2022
+    labels: ['Jun 21','Jul 21','Aug 21','Sep 21','Oct 21','Nov 21','Dec 21','Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22','Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22','Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jun 23','Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23','Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24'],
+    data: [1613,1593,1592,1500,1604,1720,1818,2433,2256,2489,2276,2318,2532,2610,2861,2641,2843,2807,2646,3421,3768,6006,9544,11486,12797,14198,16557,17297,20182,19839,18057,23392,21879,19736,21936,22215,18266,19453,21584,22716,24168],
+    peak: '24,168',
+    growth: '761%'
+  }
+];
+
+let currentClient = 0;
+const canvas = document.getElementById('trafficChart');
+const tooltip = document.getElementById('tooltip');
+const ctx = canvas.getContext('2d');
+let dpr, w, h;
+const padL = 50, padR = 16, padT = 16, padB = 28;
+
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  dpr = window.devicePixelRatio || 1;
+  w = rect.width; h = rect.height;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function draw(hoverIdx) {
+  const c = clients[currentClient];
+  const n = c.data.length;
+  const maxV = Math.max(...c.data) * 1.1;
+  const barW = Math.max(2, (w - padL - padR) / n - 1);
+  const gap = (w - padL - padR) / n;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(37,45,54,0.5)'; ctx.lineWidth = 1;
+  ctx.fillStyle = '#556068'; ctx.font = '10px Inter, system-ui'; ctx.textAlign = 'right';
+  const steps = 4;
+  for (let i = 0; i <= steps; i++) {
+    const v = (maxV / steps) * i;
+    const y = padT + (1 - v / maxV) * (h - padT - padB);
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    if (v > 0) ctx.fillText(v >= 1000 ? Math.round(v/1000) + 'K' : Math.round(v), padL - 6, y + 3);
+  }
+
+  // Start line
+  const startX = padL + c.startIdx * gap + gap / 2;
+  ctx.strokeStyle = 'rgba(47,186,194,0.5)'; ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.beginPath(); ctx.moveTo(startX, padT); ctx.lineTo(startX, h - padB); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // "I started here" label
+  ctx.fillStyle = 'rgba(47,186,194,0.7)'; ctx.font = '600 9px Inter, system-ui'; ctx.textAlign = 'center';
+  ctx.fillText('▼ I started here', startX, padT - 3);
+
+  // Bars
+  c.data.forEach((v, i) => {
+    const x = padL + i * gap;
+    const barH = (v / maxV) * (h - padT - padB);
+    const y = h - padB - barH;
+    const isBefore = i < c.startIdx;
+
+    if (hoverIdx === i) {
+      ctx.fillStyle = isBefore ? '#5a6070' : '#2fbac2';
+    } else {
+      ctx.fillStyle = isBefore ? '#2a2f3a' : 'rgba(10,133,140,0.6)';
+    }
+    ctx.beginPath();
+    ctx.roundRect(x + 0.5, y, Math.max(1, barW - 1), barH, [2, 2, 0, 0]);
+    ctx.fill();
+  });
+}
+
+function getHoverIdx(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const c = clients[currentClient];
+  const gap = (w - padL - padR) / c.data.length;
+  const idx = Math.floor((mx - padL) / gap);
+  return idx >= 0 && idx < c.data.length ? idx : null;
+}
+
+canvas.addEventListener('mousemove', function(e) {
+  const idx = getHoverIdx(e);
+  draw(idx);
+  if (idx === null) { tooltip.classList.remove('visible'); return; }
+
+  const c = clients[currentClient];
+  const gap = (w - padL - padR) / c.data.length;
+  const x = padL + idx * gap + gap / 2;
+  const barH = (c.data[idx] / (Math.max(...c.data) * 1.1)) * (h - padT - padB);
+  const y = h - padB - barH;
+
+  const isBefore = idx < c.startIdx;
+  tooltip.innerHTML = `
+    <div class="tooltip-month">${c.labels[idx]}</div>
+    <div class="tooltip-value">${c.data[idx].toLocaleString()} users</div>
+    ${isBefore ? '' : '<div class="tooltip-note">After I took over</div>'}
+  `;
+  tooltip.classList.add('visible');
+
+  const tw = tooltip.offsetWidth;
+  let left = x - tw / 2;
+  if (left < 0) left = 4;
+  if (left + tw > w) left = w - tw - 4;
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = Math.max(4, y - 60) + 'px';
+});
+
+canvas.addEventListener('mouseleave', function() { draw(null); tooltip.classList.remove('visible'); });
+
+function switchClient(idx) {
+  currentClient = idx;
+  document.querySelectorAll('.chart-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  draw(null);
+}
+
+resize(); draw(null);
+window.addEventListener('resize', () => { resize(); draw(null); });
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>

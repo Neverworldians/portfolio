@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building the Go-to-Market Strategy for a Lifestyle Brand Launch — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+/* CASE STUDY BASE */
+.case-study { padding-top: 64px; }
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+.callout { border-left: 3px solid var(--accent); padding: 1.25rem 1.5rem; margin: 2rem 0; background: var(--accent-subtle); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 1.1rem; color: var(--text); line-height: 1.65; font-style: italic; }
+
+/* WIDE SECTIONS - break out of 760px */
+.wide { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* ECOSYSTEM FLOW */
+.eco-flow { display: flex; flex-direction: column; gap: 0; margin: 2.5rem 0; }
+.eco-step { display: flex; align-items: center; gap: 1.25rem; position: relative; padding: 1rem 0; }
+.eco-step::after {
+  content: ''; position: absolute; left: 23px; top: calc(100% - 4px);
+  width: 2px; height: 12px; background: var(--accent); opacity: 0.4;
+}
+.eco-step:last-child::after { display: none; }
+.eco-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-subtle); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.eco-text { flex: 1; }
+.eco-label { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+.eco-sub { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.15rem; line-height: 1.4; }
+
+.eco-summary {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2.5rem;
+}
+.eco-sum-card {
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem; text-align: center;
+}
+.eco-sum-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); margin-bottom: 0.4rem; }
+.eco-sum-what { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+/* CHANNEL STRATEGY */
+.channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+.channel-col { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.channel-heading { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+.channel-heading.acq { color: var(--accent-light); }
+.channel-heading.ret { color: #c9a0e8; }
+.channel-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.5rem 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+.channel-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.channel-dot.acq { background: var(--accent-light); }
+.channel-dot.ret { background: #c9a0e8; }
+
+.channel-bridge {
+  background: var(--accent-subtle); border: 2px solid var(--accent); border-radius: var(--radius);
+  padding: 1.25rem 1.5rem; margin: 1rem 0 2.5rem; text-align: center;
+}
+.channel-bridge-title { font-size: 0.82rem; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+.channel-bridge-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* LOYALTY CARDS */
+.loyalty-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.5rem 0; }
+.loyalty-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.loyalty-emoji { font-size: 1.75rem; margin-bottom: 0.75rem; }
+.loyalty-name { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.loyalty-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+/* CONTENT FLOWCHART */
+.content-flow { margin: 2.5rem 0; }
+.cf-root {
+  background: var(--accent-subtle); border: 2px solid var(--accent); border-radius: var(--radius);
+  padding: 1rem 1.5rem; text-align: center; max-width: 280px; margin: 0 auto 0;
+}
+.cf-root-label { font-size: 0.95rem; font-weight: 700; color: var(--accent-light); }
+.cf-root-sub { font-size: 0.78rem; color: var(--text-dim); }
+.cf-connector { width: 2px; height: 24px; background: var(--accent); opacity: 0.4; margin: 0 auto; }
+.cf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; margin-top: 0; }
+.cf-split::before {
+  content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 2px; background: var(--accent); opacity: 0.4;
+}
+.cf-branch { position: relative; padding-top: 24px; }
+.cf-branch::before {
+  content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 24px; background: var(--accent); opacity: 0.4;
+}
+.cf-branch-card {
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem;
+}
+.cf-branch-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.cf-branch-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+.cf-connector-down { width: 2px; height: 24px; background: var(--accent); opacity: 0.4; margin: 0 auto; }
+.cf-outputs {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0;
+  padding-top: 12px; position: relative;
+}
+.cf-outputs::before {
+  content: ''; position: absolute; top: 0; left: 15%; right: 15%; height: 2px; background: var(--accent); opacity: 0.4;
+}
+.cf-out-pill {
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: 100px;
+  padding: 0.4rem 1rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 500;
+  position: relative; padding-top: calc(0.4rem + 12px);
+}
+.cf-out-pill::before {
+  content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 12px; background: var(--accent); opacity: 0.4;
+}
+
+/* AUDIENCE ACCORDION */
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+.audience-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.audience-header { padding: 1.25rem 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+.audience-header:hover { background: var(--bg-hover); }
+.audience-type { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.25rem; }
+.audience-name { font-size: 1rem; font-weight: 700; color: var(--text); }
+.audience-arrow { font-size: 0.85rem; color: var(--text-dim); transition: transform 0.2s; }
+.audience-card.open .audience-arrow { transform: rotate(180deg); }
+.audience-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.audience-body-inner { padding: 0 1.5rem 1.25rem; }
+.audience-group-label { font-size: 0.72rem; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.06em; margin: 0.75rem 0 0.4rem; }
+.audience-group-label:first-child { margin-top: 0; }
+.audience-scenario { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; padding: 0.3rem 0; padding-left: 0.75rem; border-left: 2px solid var(--border); margin-bottom: 0.4rem; }
+
+/* KPI GRID */
+.kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.5rem 0; }
+.kpi-col { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.kpi-heading { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.kpi-question { font-size: 0.75rem; color: var(--text-dim); font-style: italic; margin-bottom: 1rem; }
+.kpi-item { font-size: 0.85rem; color: var(--text-muted); padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
+.kpi-item:last-child { border-bottom: none; }
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .eco-summary { grid-template-columns: 1fr; }
+  .channel-grid { grid-template-columns: 1fr; }
+  .loyalty-cards { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .cf-split { grid-template-columns: 1fr; }
+  .cf-split::before { display: none; }
+  .cf-branch::before { display: none; }
+  .cf-branch { padding-top: 0; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../">Work</a>
+      <a href="../">Experience</a>
+      <a href="../" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">Multi-Brand Hospitality · Pre-Launch</p>
+    <h1 class="case-title">Building the Go-to-Market Strategy for a Lifestyle Brand Launch</h1>
+    <p class="case-desc">A hospitality company wanted to become a lifestyle brand. I designed the strategic framework that answered the question: okay, we have a brand. Now how does it actually work?</p>
+    <div class="case-tags">
+      <span class="tag">Go-to-Market Strategy</span>
+      <span class="tag">Brand Architecture</span>
+      <span class="tag">Loyalty Design</span>
+      <span class="tag">Content Strategy</span>
+      <span class="tag">Audience Architecture</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <p style="font-size: 0.85rem; color: var(--text-dim); font-style: italic; margin-bottom: 2rem;">Note: Brand name and identifying details have been anonymized due to a pre-launch NDA. The strategic framework, positioning, and architecture are my original work, approved by leadership and currently in implementation.</p>
+
+    <h2>The Situation</h2>
+    <p>The company operates a multi-brand hospitality portfolio: restaurants, a hotel, a pool club, event spaces, and meeting venues. Leadership had a long-term vision to evolve beyond hospitality and into a lifestyle brand that could eventually sell products (wellness, sleep, home goods) and scale to other cities.</p>
+    <p>The problem was that the existing properties served completely different audiences with no connective tissue between them. There was no shared database, no cross-property awareness, and no mechanism to turn a one-time guest into a long-term brand relationship.</p>
+    <p>Through early working sessions with the VP of marketing, we landed on a <strong>loyalty program</strong> as the connective tissue between properties. That loyalty program needed to live somewhere, which is how the <strong>app</strong> came into the picture: it was the infrastructure for building and owning the database.</p>
+    <p>A creative director was hired to build the brand identity. My job was to answer the question that came after: <strong>okay, we have a brand and a $1.6M budget. Now make it work.</strong></p>
+
+    <h2>The Ecosystem Model</h2>
+
+    <div class="wide">
+      <div class="eco-flow">
+        <div class="eco-step">
+          <div class="eco-icon">🔍</div>
+          <div class="eco-text">
+            <div class="eco-label">Discovers a property</div>
+            <div class="eco-sub">Restaurant, pool, hotel, event</div>
+          </div>
+        </div>
+        <div class="eco-step">
+          <div class="eco-icon">👣</div>
+          <div class="eco-text">
+            <div class="eco-label">Visits it</div>
+            <div class="eco-sub">First in-person experience</div>
+          </div>
+        </div>
+        <div class="eco-step">
+          <div class="eco-icon">📱</div>
+          <div class="eco-text">
+            <div class="eco-label">Learns about the brand, downloads the app</div>
+            <div class="eco-sub">On-property touchpoints drive conversion</div>
+          </div>
+        </div>
+        <div class="eco-step">
+          <div class="eco-icon">🔄</div>
+          <div class="eco-text">
+            <div class="eco-label">Enters the loyalty ecosystem</div>
+            <div class="eco-sub">Points, perks, personalization</div>
+          </div>
+        </div>
+        <div class="eco-step">
+          <div class="eco-icon">✨</div>
+          <div class="eco-text">
+            <div class="eco-label">Engages and books cross-property</div>
+            <div class="eco-sub">No longer a guest. A member.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="eco-summary">
+        <div class="eco-sum-card">
+          <div class="eco-sum-role">Acquisition engines</div>
+          <div class="eco-sum-what">The individual properties. They drive foot traffic.</div>
+        </div>
+        <div class="eco-sum-card">
+          <div class="eco-sum-role">Retention layer</div>
+          <div class="eco-sum-what">The app. It builds and owns the database.</div>
+        </div>
+        <div class="eco-sum-card">
+          <div class="eco-sum-role">The brand</div>
+          <div class="eco-sum-what">Gets built over time, one visit and one download at a time.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>How We'd Measure It</h2>
+
+    <div class="wide">
+      <div class="kpi-grid">
+        <div class="kpi-col">
+          <div class="kpi-heading">Property Health</div>
+          <div class="kpi-question">Are individual properties growing?</div>
+          <div class="kpi-item">Covers growth</div>
+          <div class="kpi-item">Website traffic growth</div>
+          <div class="kpi-item">Conversion rate</div>
+          <div class="kpi-item">Social engagement</div>
+          <div class="kpi-item">Social traffic → website</div>
+          <div class="kpi-item">Covers from social</div>
+        </div>
+        <div class="kpi-col">
+          <div class="kpi-heading">Ecosystem Conversion</div>
+          <div class="kpi-question">Are property visitors entering the ecosystem?</div>
+          <div class="kpi-item">% of visitors → app downloads</div>
+          <div class="kpi-item">App downloads / accounts created</div>
+          <div class="kpi-item">Activation rate (post-download usage)</div>
+          <div class="kpi-item">90-day retention rate</div>
+          <div class="kpi-item">Repeat visits</div>
+        </div>
+        <div class="kpi-col">
+          <div class="kpi-heading">Brand Growth</div>
+          <div class="kpi-question">Is the brand gaining awareness and traction?</div>
+          <div class="kpi-item">Brand search volume growth</div>
+          <div class="kpi-item">Brand website traffic growth</div>
+          <div class="kpi-item">Email list growth</div>
+          <div class="kpi-item">Instagram following growth</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Channel Strategy &amp; Retention Loop</h2>
+
+    <div class="wide">
+      <div class="channel-grid">
+        <div class="channel-col">
+          <div class="channel-heading acq">Acquisition</div>
+          <div class="channel-item"><span class="channel-dot acq"></span>Organic search (property-level and brand-level SEO)</div>
+          <div class="channel-item"><span class="channel-dot acq"></span>Organic social (individual property accounts + brand account)</div>
+          <div class="channel-item"><span class="channel-dot acq"></span>Paid ads on Meta and Google (property-level)</div>
+          <div class="channel-item"><span class="channel-dot acq"></span>Press coverage and digital PR</div>
+          <div class="channel-item"><span class="channel-dot acq"></span>Influencer partnerships at launch</div>
+        </div>
+        <div class="channel-col">
+          <div class="channel-heading ret">Retention</div>
+          <div class="channel-item"><span class="channel-dot ret"></span>App push notifications driving members back to content and events</div>
+          <div class="channel-item"><span class="channel-dot ret"></span>In-app editorial content (reasons to open beyond checking points)</div>
+          <div class="channel-item"><span class="channel-dot ret"></span>Promo emails for event invitations and early access</div>
+          <div class="channel-item"><span class="channel-dot ret"></span>SMS for flash announcements and last-minute availability</div>
+        </div>
+      </div>
+      <div class="channel-bridge">
+        <div class="channel-bridge-title">On-Property Conversion (The Critical Bridge)</div>
+        <div class="channel-bridge-text">Every guest touchpoint (receipt QR codes, table tents, server prompts, WiFi capture) drives into the brand platform. QR directs to a lightweight web experience for immediate point redemption, which then promotes the native app download. This reduces friction at the highest-intent moment: when the guest is still on property and just had a positive experience.</div>
+      </div>
+    </div>
+
+    <h2>The Loyalty Program</h2>
+    <p>The app needed to offer immediate, tangible value beyond "we're a cool brand." I designed a three-layer loyalty structure:</p>
+
+    <div class="wide">
+      <div class="loyalty-cards">
+        <div class="loyalty-card">
+          <div class="loyalty-emoji">🪙</div>
+          <div class="loyalty-name">Earn</div>
+          <div class="loyalty-desc">Points system where guests earn by dining, attending events, and engaging with the brand. Traditional, but the lowest barrier to entry.</div>
+        </div>
+        <div class="loyalty-card">
+          <div class="loyalty-emoji">🎁</div>
+          <div class="loyalty-name">Spend</div>
+          <div class="loyalty-desc">Redeem points at our properties and at curated local partner businesses: boutiques, fitness studios, coffee shops, bookstores handpicked for brand alignment.</div>
+        </div>
+        <div class="loyalty-card">
+          <div class="loyalty-emoji">💛</div>
+          <div class="loyalty-name">Give</div>
+          <div class="loyalty-desc">A portion of every redemption supports a local community cause, with the option to donate points directly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">This solved a real cold-start problem. At launch, we don't have enough of our own properties, products, or events to fill out an app on our own. So we curate the neighborhood, build the database, and create a habit of checking the app. As we grow, the ratio shifts. The local partners go from being the main attraction to the seasoning.</div>
+
+    <h2>The Content Engine</h2>
+    <p>I built a content strategy around a central editorial hub (a Journal on the website and in the app) that serves two functions:</p>
+
+    <div class="wide">
+      <div class="content-flow">
+        <div class="cf-root">
+          <div class="cf-root-label">The Journal</div>
+          <div class="cf-root-sub">Website + In-App Editorial Hub</div>
+        </div>
+        <div class="cf-connector"></div>
+        <div class="cf-split">
+          <div class="cf-branch">
+            <div class="cf-branch-card">
+              <div class="cf-branch-title">SEO Acquisition</div>
+              <div class="cf-branch-desc">"What to do in LA this weekend" style content. Highlights local partners and our events. Gets eyeballs from people who don't know the brand yet.</div>
+            </div>
+          </div>
+          <div class="cf-branch">
+            <div class="cf-branch-card">
+              <div class="cf-branch-title">Editorial Depth</div>
+              <div class="cf-branch-desc">Profiles on local artists, stories behind our partners, inspiration behind our spaces. Gives the brand a point of view and makes people want to stay.</div>
+            </div>
+          </div>
+        </div>
+        <div class="cf-connector-down"></div>
+        <div class="cf-outputs">
+          <div class="cf-out-pill">Social Teasers</div>
+          <div class="cf-out-pill">Email Newsletters</div>
+          <div class="cf-out-pill">PR &amp; Backlinks</div>
+          <div class="cf-out-pill">Paid Amplification</div>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>SEO acquisition:</strong> topics like "what to do in LA this weekend" where we highlight local partners and our own events. Gets eyeballs from people who don't know the brand exists yet.</p>
+    <p><strong>Editorial depth:</strong> profiles on local artists, stories behind our partners, the inspiration behind our spaces. This gives the brand a point of view and makes people want to stay once they find us.</p>
+    <p>Both types of content become fuel for every other channel. Social pulls teasers. Email curates highlights. PR coverage generates backlinks and builds AI search visibility. Paid boosts top performers.</p>
+
+    <h2>Audience Architecture</h2>
+    <p>I developed detailed behavioral audience profiles, segmented into four groups. These aren't demographic buckets. They're behavioral scenarios: the specific situations and motivations that drive someone to discover and engage with a property. Click to explore each one.</p>
+
+    <div class="wide">
+      <div class="audience-grid">
+
+        <div class="audience-card" onclick="toggleAudience(this)">
+          <div class="audience-header">
+            <div>
+              <div class="audience-type">Acquisition</div>
+              <div class="audience-name">Experience Seekers</div>
+            </div>
+            <span class="audience-arrow">▼</span>
+          </div>
+          <div class="audience-body">
+            <div class="audience-body-inner">
+              <div class="audience-group-label">Locals</div>
+              <div class="audience-scenario">Someone who wants to impress a date.</div>
+              <div class="audience-scenario">Someone who wants a girls night that looks good on Instagram stories.</div>
+              <div class="audience-scenario">Someone bored of their usual spots who wants something new this weekend.</div>
+              <div class="audience-group-label">Travelers</div>
+              <div class="audience-scenario">Someone visiting who wants to eat where locals eat, not where tourists go.</div>
+              <div class="audience-scenario">Someone on a work trip with one free evening who wants to make it count.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audience-card" onclick="toggleAudience(this)">
+          <div class="audience-header">
+            <div>
+              <div class="audience-type">Acquisition</div>
+              <div class="audience-name">Celebrators</div>
+            </div>
+            <span class="audience-arrow">▼</span>
+          </div>
+          <div class="audience-body">
+            <div class="audience-body-inner">
+              <div class="audience-group-label">Locals</div>
+              <div class="audience-scenario">Someone planning a bachelorette who needs a full day of activities.</div>
+              <div class="audience-scenario">Someone looking for an anniversary dinner that feels elevated.</div>
+              <div class="audience-scenario">Someone planning a proposal who needs the setting to be perfect.</div>
+              <div class="audience-group-label">Travelers</div>
+              <div class="audience-scenario">Someone planning a destination bachelorette who wants everything walkable.</div>
+              <div class="audience-scenario">Someone doing a couples getaway who wants the whole experience handled.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audience-card" onclick="toggleAudience(this)">
+          <div class="audience-header">
+            <div>
+              <div class="audience-type">Acquisition</div>
+              <div class="audience-name">Casual Convenience</div>
+            </div>
+            <span class="audience-arrow">▼</span>
+          </div>
+          <div class="audience-body">
+            <div class="audience-body-inner">
+              <div class="audience-group-label">Locals</div>
+              <div class="audience-scenario">Someone who wants pool-side drinks without planning a vacation.</div>
+              <div class="audience-scenario">Someone who needs a last-minute dinner reservation and doesn't want to think too hard.</div>
+              <div class="audience-group-label">Travelers</div>
+              <div class="audience-scenario">Someone staying at the hotel who wants dinner without leaving the property.</div>
+              <div class="audience-scenario">Someone who just checked in and wants food immediately without researching options.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audience-card" onclick="toggleAudience(this)">
+          <div class="audience-header">
+            <div>
+              <div class="audience-type">Retention · Brand Advocates</div>
+              <div class="audience-name">Early Adopters</div>
+            </div>
+            <span class="audience-arrow">▼</span>
+          </div>
+          <div class="audience-body">
+            <div class="audience-body-inner">
+              <div class="audience-scenario">Someone who likes discovering new brands before they blow up.</div>
+              <div class="audience-scenario">Someone who wants to feel like an insider with access to perks and events.</div>
+              <div class="audience-scenario">Someone who would buy merch from a hospitality brand if it was actually cool.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p>Each acquisition segment was further split into Locals and Travelers, because a local planning a bachelorette and a traveler looking for a one-night dinner recommendation need completely different messaging, content, and channel strategies. These profiles drove content strategy, ad targeting, SEO keyword priorities, and the app's feature set.</p>
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleAudience(card) {
+  const wasOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.audience-card').forEach(c => {
+    c.classList.remove('open');
+    c.querySelector('.audience-body').style.maxHeight = '0';
+  });
+  // Open clicked if it was closed
+  if (!wasOpen) {
+    card.classList.add('open');
+    const body = card.querySelector('.audience-body');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>

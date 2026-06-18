@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turning a Dead Events Program Into a Sellout Machine — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+/* CASE STUDY */
+.case-study { padding-top: 64px; }
+
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+/* CALLOUT - big insight quote */
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--accent-subtle);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* STAT BLOCK - big numbers */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+.stat-block {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-light);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* EVENT CARD - results for each event */
+.event-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+}
+.event-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.event-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.event-card-pill {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  background: var(--accent-subtle);
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.event-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* COMPARE - before/after */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+.compare-box {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.compare-box.before { border-top: 3px solid #6b3a3a; }
+.compare-box.after { border-top: 3px solid var(--accent); }
+.compare-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.compare-box.before .compare-label { color: #c27272; }
+.compare-box.after .compare-label { color: var(--accent-light); }
+.compare-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* FUNNEL */
+.funnel {
+  margin: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.funnel-step {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.funnel-step:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+.funnel-step:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+.funnel-step:not(:last-child) { border-bottom: none; }
+.funnel-step::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.funnel-step::after {
+  content: '';
+  position: absolute;
+  left: calc(1.5rem + 4px);
+  bottom: -1px;
+  width: 2px;
+  height: calc(100% - 2.5rem);
+  background: var(--border);
+}
+.funnel-step:last-child::after { display: none; }
+.funnel-number {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent-light);
+  min-width: 80px;
+}
+.funnel-label {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .compare { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .event-card-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .stat-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../">Work</a>
+      <a href="../">Experience</a>
+      <a href="../" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">Multi-Brand Hospitality</p>
+    <h1 class="case-title">How I Turned a Dead Events Program Into a Sellout Machine (On Basically No Budget)</h1>
+    <p class="case-desc">Leadership had killed their $250K events program because they couldn't prove ROI. I brought it back as a self-funding revenue channel.</p>
+    <div class="case-tags">
+      <span class="tag">Events Strategy</span>
+      <span class="tag">Audience Development</span>
+      <span class="tag">Hospitality</span>
+      <span class="tag">Revenue Growth</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <h2>The Situation</h2>
+    <p>When I joined the company, I inherited the ghost of an events program. A few years before me, leadership had tried using large-scale events to drive awareness for their destination venue, which sits at the center of a multi-brand portfolio including restaurants, a hotel, and meeting spaces. They went big. Each event cost around $250,000 to produce.</p>
+    <p>The problem: they couldn't draw a direct line from "person attended event" to "person spent money at our outlets." There was anecdotal evidence that attendees were visiting the restaurants and hotel, but no attribution. So leadership killed the big spenders.</p>
+
+    <div class="compare">
+      <div class="compare-box before">
+        <div class="compare-label">The old model</div>
+        <div class="compare-text">$250K per event. Spectacle-driven. Hope the exposure converts. No attribution, no provable ROI.</div>
+      </div>
+      <div class="compare-box after">
+        <div class="compare-label">My approach</div>
+        <div class="compare-text">Events as products. Each one self-funded through ticket sales. Targeted at specific audiences with specific unmet demand.</div>
+      </div>
+    </div>
+
+    <p>The mandate I got was clear: figure out how to make events work, but make them pay for themselves. Ticket sales had to cover costs. Food had to be paid for. And the scale was mine to define.</p>
+
+    <h2>The Insight</h2>
+    <p>The previous approach failed because it was built on a spectacle model: spend big, hope the exposure converts. I flipped the logic. Instead of subsidizing a massive production and praying for downstream revenue, I designed events as products. Each one had to be a standalone experience worth paying for, targeted at a specific audience with specific unmet needs.</p>
+
+    <div class="callout">I'm good at spotting niche communities that have both money and underserved demand. That's a weird skill to put on a resume, but it's the thing that made this work.</div>
+
+    <h2>What I Built</h2>
+
+    <p><strong>Themed Afternoon Teas</strong></p>
+    <p>The first format I launched was a themed afternoon tea series. My boss wanted to price tickets at $35. The LA market for afternoon tea sits around $70, and themed or experiential ones can push higher. I made the case, we priced accordingly, and here's what happened:</p>
+
+    <div class="event-card">
+      <div class="event-card-header">
+        <span class="event-card-title">Pride and Prejudice Tea</span>
+        <span class="event-card-pill">140 tickets · 2x target</span>
+      </div>
+      <div class="event-card-desc">People showed up in Regency-era costumes, which means the messaging really landed. Leadership was initially resistant to the theme. I pushed it through because I knew the audience: a massive, passionate, underserved community of literary fiction fans (largely women, largely with disposable income) who rarely get premium in-person experiences designed for them.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card-header">
+        <span class="event-card-title">Winter Wonderland Tea</span>
+        <span class="event-card-pill">150 tickets · 2.1x target</span>
+      </div>
+      <div class="event-card-desc">Highest ticket volume in the series. Seasonal timing and theming drove strong demand.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card-header">
+        <span class="event-card-title">Valentine's Day Tea</span>
+        <span class="event-card-pill">110 tickets · 1.6x target</span>
+      </div>
+      <div class="event-card-desc">Competing against every restaurant in LA running Valentine's specials, and still cleared target by 57%.</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-block">
+        <div class="stat-number">70</div>
+        <div class="stat-label">Leadership's target per event</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">133</div>
+        <div class="stat-label">Average tickets sold</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">1.9x</div>
+        <div class="stat-label">Average vs. target</div>
+      </div>
+    </div>
+
+    <p>These numbers were capped by venue capacity and a three-event test run, not by demand.</p>
+
+    <p><strong>The Murder Mystery Dinner</strong></p>
+    <p>The second format was something I built from scratch. I designed an original murder mystery dinner experience: three courses, three rounds of clues, printed materials, and a reveal at the end with prizes.</p>
+    <p>I also wrote the full operational playbook. I mapped the flow of the game alongside the flow of the dinner service, sat down with the F&B team, and trained them on pacing, what to say, what not to say, and how to serve clues in sync with courses. The goal was to make the event repeatable without me running it every time.</p>
+
+    <div class="stat-row">
+      <div class="stat-block">
+        <div class="stat-number">67</div>
+        <div class="stat-label">Attendees (60 cap + overflow)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">Sold out</div>
+        <div class="stat-label">With a waitlist</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">3 months</div>
+        <div class="stat-label">Still fielding requests</div>
+      </div>
+    </div>
+
+    <h2>The Bigger Picture</h2>
+    <p>These events weren't the end goal. They were the top of a funnel.</p>
+
+    <div class="funnel">
+      <div class="funnel-step">
+        <span class="funnel-number">525</span>
+        <span class="funnel-label">New email subscribers captured from event attendees</span>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">1,132</span>
+        <span class="funnel-label">New Instagram followers gained through event promotion</span>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">650</span>
+        <span class="funnel-label">Website users driven by event-related traffic</span>
+      </div>
+      <div class="funnel-step">
+        <span class="funnel-number">$5,000+</span>
+        <span class="funnel-label">Private event booking from a single tea attendee</span>
+      </div>
+    </div>
+
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
