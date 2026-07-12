@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I 4x'd Monthly Lead Volume for a Venue — Maya Plastinina</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A858C'/><text x='16' y='22' font-family='system-ui' font-weight='700' font-size='16' fill='white' text-anchor='middle'>M</text></svg>">
+  <style>
+.case-study { padding-top: 64px; }
+.case-header { padding-top: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+.back-link { display: inline-block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent-light); }
+.case-company { font-size: 0.85rem; font-weight: 600; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+.case-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.case-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; line-height: 1.65; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag { font-size: 0.78rem; font-weight: 500; color: var(--accent-light); background: var(--accent-subtle); padding: 0.3rem 0.85rem; border-radius: 100px; }
+
+.case-body { max-width: 760px; font-size: 1.05rem; line-height: 1.75; color: var(--text-muted); padding-bottom: 4rem; }
+.case-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 3.5rem 0 1rem; letter-spacing: -0.02em; }
+.case-body p { margin-bottom: 1.25rem; }
+.case-body strong { color: var(--text); font-weight: 600; }
+
+.callout { border-left: 3px solid var(--accent); padding: 1.25rem 1.5rem; margin: 2rem 0; background: var(--accent-subtle); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 1.1rem; color: var(--text); line-height: 1.65; font-style: italic; }
+.wide { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat-block { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+.stat-number { font-size: 1.75rem; font-weight: 800; color: var(--accent-light); letter-spacing: -0.03em; line-height: 1.2; }
+.stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; font-weight: 500; }
+
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.compare-box { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.compare-box.before { border-top: 3px solid #6b3a3a; }
+.compare-box.after { border-top: 3px solid var(--accent); }
+.compare-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.compare-box.before .compare-label { color: #c27272; }
+.compare-box.after .compare-label { color: var(--accent-light); }
+.compare-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+.approach-step { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.25rem 0; }
+.approach-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.approach-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; }
+
+.chart-wrapper { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem 1.5rem; margin: 2.5rem 0; }
+.chart-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.chart-subtitle { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+.chart-legend { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.8rem; color: var(--text-muted); }
+.chart-legend span { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.chart-container { position: relative; width: 100%; height: 320px; }
+.chart-container canvas { width: 100% !important; height: 100% !important; }
+.chart-tooltip { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; font-size: 0.82rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 10; white-space: nowrap; }
+.chart-tooltip.visible { opacity: 1; }
+.tooltip-month { font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+.tooltip-value { color: var(--text-muted); }
+.tooltip-note { color: var(--accent-light); font-size: 0.72rem; font-weight: 600; margin-top: 0.15rem; }
+
+.footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 6rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-text { color: var(--text-dim); font-size: 0.85rem; }
+.footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .compare { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .stat-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="nav-logo">M</a>
+    <div class="nav-links">
+      <a href="../work.html">Work</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article class="case-study">
+  <header class="case-header container">
+    <a href="../work.html" class="back-link">← Back to work</a>
+    <p class="case-company">B2B &amp; B2C</p>
+    <h1 class="case-title">How I 4x'd Monthly Lead Volume for a Venue That Was Barely Getting Found</h1>
+    <p class="case-desc">133 leads in two years under the previous team. 127 leads in the first six months of 2026. A complete rebuild of the content, search, and paid strategy.</p>
+    <div class="case-tags">
+      <span class="tag">SEO</span>
+      <span class="tag">Content Strategy</span>
+      <span class="tag">Paid Search</span>
+      <span class="tag">Local SEO</span>
+    </div>
+  </header>
+
+  <div class="case-body container">
+
+    <h2>The Situation</h2>
+    <p>When I took over the venue's digital presence, the website was underperforming significantly. The previous team had generated 133 leads across two full years. The content was largely AI-generated with keywords inserted in ways that felt forced and unnatural, which hurt both search performance and credibility with visitors.</p>
+
+    <div class="wide">
+      <div class="compare">
+        <div class="compare-box before">
+          <div class="compare-label">Previous team (2 years)</div>
+          <div class="compare-text">133 total leads. AI-generated content with forced keyword stuffing. Poor search performance, low credibility.</div>
+        </div>
+        <div class="compare-box after">
+          <div class="compare-label">First 6 months of 2026</div>
+          <div class="compare-text">127 leads. 30 new pages built around keyword and audience maps. Paid search launched. Local SEO optimized.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Results</h2>
+    <p>In the first six months of 2026, the website generated 127 leads, nearly matching the previous team's two-year total in a quarter of the time. Website traffic increased 40% year over year.</p>
+
+    <div class="wide">
+      <div class="stat-row">
+        <div class="stat-block">
+          <div class="stat-number">127</div>
+          <div class="stat-label">Leads in 6 months (vs 133 in 2 years)</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">+40%</div>
+          <div class="stat-label">Website traffic YoY</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">4.3%</div>
+          <div class="stat-label">Paid search CTR</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$354</div>
+          <div class="stat-label">CPA vs $10K–$50K booking value</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wide">
+      <div class="chart-wrapper">
+        <div class="chart-title">Annual Lead Volume</div>
+        <div class="chart-subtitle">Hover for details. Dashed section = projected full-year 2026 at current pace.</div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background: var(--text-dim);"></span> Previous team</span>
+          <span><span class="legend-dot" style="background: var(--accent-light);"></span> 2026 actual (Jan–Jun)</span>
+          <span><span class="legend-dot" style="background: var(--accent-light); opacity: 0.4;"></span> 2026 projected (Jul–Dec)</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="leadsChart"></canvas>
+          <div class="chart-tooltip" id="tooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Approach</h2>
+
+    <div class="approach-step">
+      <div class="approach-title">Audience &amp; Keyword Mapping</div>
+      <div class="approach-desc">The venue serves two distinct audiences: corporate clients booking meetings, team offsites, and company functions, and consumers planning personal celebrations like weddings, birthdays, and milestone events. I mapped out the keyword landscape for both segments, identifying which search terms carried real booking intent and which pages should target which queries. Every page got a clear audience, a clear intent match, and a reason to exist.</div>
+    </div>
+
+    <div class="approach-step">
+      <div class="approach-title">Content Overhaul</div>
+      <div class="approach-desc">I replaced the existing copy with roughly 20 new pages built around those keyword and audience maps, plus about 10 supporting blog posts designed to capture longer-tail searches and drive internal traffic to the core conversion pages. All content was written to convert, not just rank.</div>
+    </div>
+
+    <div class="approach-step">
+      <div class="approach-title">Paid Search</div>
+      <div class="approach-desc">I built a media plan projecting lead volume against the available budget, presented the proposal to leadership, and got approval to launch. I ran search campaigns on phrase match targeting bottom-of-funnel venue booking queries. The first two weeks were heavy on negative keyword refinement, since Google was matching us to searches outside our target intent. Once the negative keyword list was dialed in, the campaign settled into strong performance: 4.3% CTR and $354 CPA against an average booking value of $10K–$50K.</div>
+    </div>
+
+    <div class="approach-step">
+      <div class="approach-title">Local Search Optimization</div>
+      <div class="approach-desc">I fully optimized the Google Business Profile, which is one of the highest-impact, lowest-effort moves for any venue competing in local search. For a business where "near me" and map pack visibility directly drive inquiries, this was a baseline that hadn't been properly addressed.</div>
+    </div>
+
+    <div class="callout">133 leads in two years under the previous team. 127 leads in the first six months of 2026. If the current pace holds, 2026 is on track to deliver more than 3x the total output of the prior two years combined.</div>
+
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-text">Built with ❤️ and Claude</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/maya-plastinina/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:plastininamaya@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const years = ['2024', '2025', '2026'];
+  const actual = [80, 53, 127];
+  const projected = [0, 0, 127]; // additional projected amount on top of actual for 2026
+  const isMine = [false, false, true];
+
+  const canvas = document.getElementById('leadsChart');
+  const tooltip = document.getElementById('tooltip');
+  const ctx = canvas.getContext('2d');
+  let dpr, w, h;
+  const padL = 50, padR = 30, padT = 20, padB = 50;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw(hoverIdx) {
+    ctx.clearRect(0, 0, w, h);
+    const maxV = 300;
+    const n = actual.length;
+    const barArea = w - padL - padR;
+    const gap = barArea / n;
+    const barW = Math.min(100, gap * 0.5);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(37,45,54,0.5)'; ctx.lineWidth = 1;
+    ctx.fillStyle = '#556068'; ctx.font = '11px Inter, system-ui'; ctx.textAlign = 'right';
+    for (let v = 0; v <= 300; v += 50) {
+      const y = padT + (1 - v / maxV) * (h - padT - padB);
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+      ctx.fillText(v.toString(), padL - 8, y + 4);
+    }
+
+    // Year labels
+    ctx.fillStyle = '#8896a0'; ctx.font = '13px Inter, system-ui'; ctx.textAlign = 'center';
+    years.forEach((yr, i) => {
+      ctx.fillText(yr, padL + i * gap + gap / 2, h - padB + 22);
+    });
+
+    // Bars
+    actual.forEach((v, i) => {
+      const x = padL + i * gap + (gap - barW) / 2;
+      const barH = (v / maxV) * (h - padT - padB);
+      const y = h - padB - barH;
+
+      // Actual bar
+      ctx.fillStyle = isMine[i]
+        ? (hoverIdx === i ? '#2fbac2' : 'rgba(10,133,140,0.7)')
+        : (hoverIdx === i ? '#5a6070' : '#2a2f3a');
+      ctx.beginPath();
+      if (projected[i] > 0) {
+        // No top rounding since projected sits on top
+        ctx.rect(x, y, barW, barH);
+      } else {
+        ctx.roundRect(x, y, barW, barH, [4, 4, 0, 0]);
+      }
+      ctx.fill();
+
+      // Projected extension (dashed, on top)
+      if (projected[i] > 0) {
+        const projH = (projected[i] / maxV) * (h - padT - padB);
+        const projY = y - projH;
+
+        ctx.strokeStyle = hoverIdx === i ? 'rgba(47,186,194,0.8)' : 'rgba(47,186,194,0.4)';
+        ctx.lineWidth = 2; ctx.setLineDash([5, 3]);
+        ctx.beginPath();
+        ctx.roundRect(x, projY, barW, projH, [4, 4, 0, 0]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = hoverIdx === i ? 'rgba(47,186,194,0.12)' : 'rgba(47,186,194,0.05)';
+        ctx.beginPath();
+        ctx.roundRect(x, projY, barW, projH, [4, 4, 0, 0]);
+        ctx.fill();
+
+        // Value label on hover
+        if (hoverIdx === i) {
+          ctx.fillStyle = 'rgba(47,186,194,0.6)';
+          ctx.font = '600 11px Inter, system-ui'; ctx.textAlign = 'center';
+          ctx.fillText('~' + (v + projected[i]), x + barW / 2, projY - 8);
+        }
+      } else if (hoverIdx === i) {
+        ctx.fillStyle = isMine[i] ? '#2fbac2' : '#8896a0';
+        ctx.font = '700 13px Inter, system-ui'; ctx.textAlign = 'center';
+        ctx.fillText(v.toString(), x + barW / 2, y - 8);
+      }
+    });
+  }
+
+  function getHoverIdx(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const gap = (w - padL - padR) / actual.length;
+    const idx = Math.floor((mx - padL) / gap);
+    return idx >= 0 && idx < actual.length ? idx : null;
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    const idx = getHoverIdx(e);
+    draw(idx);
+    if (idx === null) { tooltip.classList.remove('visible'); return; }
+
+    const gap = (w - padL - padR) / actual.length;
+    const x = padL + idx * gap + gap / 2;
+    const totalH = ((actual[idx] + projected[idx]) / 300) * (h - padT - padB);
+    const y = h - padB - totalH;
+
+    let html = '<div class="tooltip-month">' + years[idx] + '</div>';
+    if (projected[idx] > 0) {
+      html += '<div class="tooltip-value">' + actual[idx] + ' leads (Jan–Jun actual)</div>';
+      html += '<div class="tooltip-note">~' + (actual[idx] + projected[idx]) + ' projected full year</div>';
+    } else {
+      html += '<div class="tooltip-value">' + actual[idx] + ' leads</div>';
+    }
+
+    tooltip.innerHTML = html;
+    tooltip.classList.add('visible');
+
+    const tw = tooltip.offsetWidth;
+    let left = x - tw / 2;
+    if (left < 0) left = 4;
+    if (left + tw > w) left = w - tw - 4;
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = Math.max(4, y - 70) + 'px';
+  });
+
+  canvas.addEventListener('mouseleave', function() { draw(null); tooltip.classList.remove('visible'); });
+
+  resize(); draw(null);
+  window.addEventListener('resize', () => { resize(); draw(null); });
+})();
+</script>
+
+</body>
+</html>
